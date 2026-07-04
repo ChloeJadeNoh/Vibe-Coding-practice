@@ -74,7 +74,7 @@ if st.session_state.page == "main":
 
     st.markdown("""
         <div class="title">
-            😊 안녕하세요, 저는 당신의 첫 웹사이트입니다 😊
+            😊 안녕하세요, 저는 당신의 첫 웹앱입니다 😊
         </div>
     """, unsafe_allow_html=True)
 
