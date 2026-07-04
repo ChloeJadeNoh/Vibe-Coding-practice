@@ -1,101 +1,209 @@
 import streamlit as st
 
-# -----------------------------
+# ---------------------------------
 # 페이지 설정
-# -----------------------------
+# ---------------------------------
 st.set_page_config(
     page_title="첫 웹사이트",
     page_icon="😊",
     layout="centered"
 )
 
-# -----------------------------
-# 상태 저장
-# -----------------------------
 if "page" not in st.session_state:
     st.session_state.page = "main"
 
-# -----------------------------
+# ---------------------------------
 # CSS
-# -----------------------------
+# ---------------------------------
+
 st.markdown("""
 <style>
 
+/* 전체 배경 */
+
 .stApp{
-    background-color:#BFEFFF;
+
+background:linear-gradient(
+135deg,
+#CFEFFF 0%,
+#B7E8FF 50%,
+#DDF6FF 100%
+);
+
+height:100vh;
+
 }
+
+
+/* 카드 */
+
+.card{
+
+max-width:900px;
+
+margin:120px auto;
+
+padding:70px;
+
+background:rgba(255,255,255,0.35);
+
+backdrop-filter:blur(10px);
+
+border-radius:30px;
+
+box-shadow:0 10px 35px rgba(0,0,0,0.15);
+
+animation:fadeIn 1.2s;
+
+}
+
 
 /* 제목 */
+
 .title{
-    text-align:center;
-    color:#123A8F;
-    font-size:42px;
-    font-weight:bold;
-    margin-top:180px;
+
+text-align:center;
+
+font-size:clamp(30px,3vw,46px);
+
+font-weight:bold;
+
+color:#123A8F;
+
+line-height:1.4;
+
+margin-bottom:60px;
+
 }
 
-/* 축하 문구 */
+
+/* 결과 */
+
 .message{
-    text-align:center;
-    color:#123A8F;
-    font-size:42px;
-    font-weight:bold;
-    margin-top:170px;
+
+text-align:center;
+
+font-size:clamp(30px,3vw,46px);
+
+font-weight:bold;
+
+color:#123A8F;
+
+line-height:1.4;
+
+margin-bottom:60px;
+
 }
 
-/* 버튼 전체 가운데 정렬 */
-div.stButton{
-    display:flex;
-    justify-content:center;
-    margin-top:35px;
+
+/* 버튼 */
+
+div.stButton>button{
+
+width:230px;
+
+height:58px;
+
+border-radius:15px;
+
+border:2px solid #123A8F;
+
+background:white;
+
+color:#123A8F;
+
+font-size:20px;
+
+font-weight:bold;
+
+box-shadow:0 5px 15px rgba(0,0,0,0.15);
+
+transition:0.25s;
+
 }
 
-/* 버튼 꾸미기 */
-div.stButton > button{
-    background:white;
-    color:#123A8F;
-    font-size:20px;
-    border-radius:12px;
-    padding:10px 30px;
-    border:2px solid #123A8F;
+
+div.stButton>button:hover{
+
+transform:translateY(-3px) scale(1.05);
+
+background:#EAF7FF;
+
+box-shadow:0 8px 20px rgba(0,0,0,0.2);
+
 }
 
-div.stButton > button:hover{
-    background:#EAF7FF;
+
+/* 등장 애니메이션 */
+
+@keyframes fadeIn{
+
+from{
+
+opacity:0;
+
+transform:translateY(25px);
+
+}
+
+to{
+
+opacity:1;
+
+transform:translateY(0);
+
+}
+
 }
 
 </style>
 """, unsafe_allow_html=True)
 
-# -----------------------------
+# ---------------------------------
 # 메인 화면
-# -----------------------------
+# ---------------------------------
+
 if st.session_state.page == "main":
 
     st.markdown("""
-        <div class="title">
-            😊 안녕하세요, 저는 당신의 첫 웹앱입니다 😊
-        </div>
+    <div class="card">
+
+    <div class="title">
+    😊 안녕하세요,<br>
+    저는 당신의 첫 웹앱입니다 😊
+    </div>
+
+    </div>
     """, unsafe_allow_html=True)
 
-    if st.button("나도 인사하기"):
-        st.session_state.page = "result"
-        st.rerun()
+    c1, c2, c3 = st.columns([2,1,2])
 
-# -----------------------------
+    with c2:
+        if st.button("나도 인사하기", use_container_width=True):
+            st.session_state.page = "result"
+            st.rerun()
+
+# ---------------------------------
 # 결과 화면
-# -----------------------------
+# ---------------------------------
+
 else:
 
-    # 폭죽 효과
     st.balloons()
 
     st.markdown("""
-        <div class="message">
-            🎉 첫 웹페이지 제작을 축하해요! 🎉
-        </div>
+    <div class="card">
+
+    <div class="message">
+    🎉 첫 웹페이지 제작을 축하해요! 🎉
+    </div>
+
+    </div>
     """, unsafe_allow_html=True)
 
-    if st.button("돌아가기"):
-        st.session_state.page = "main"
-        st.rerun()
+    c1, c2, c3 = st.columns([2,1,2])
+
+    with c2:
+        if st.button("돌아가기", use_container_width=True):
+            st.session_state.page = "main"
+            st.rerun()
